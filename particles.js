@@ -129,7 +129,8 @@ vec4 qx=St;vec4 qy=-Ct;vec4 qz=vec4(0.0);vec4 px=sz*qy;vec4 py=-sz*qx;vec4 pz=sz
 #else
 if(alpha!=0.0){vec4 Sp=sin(psi);vec4 Cp=cos(psi);vec4 px=Ct*sz_prime;vec4 py=St*sz_prime;vec4 pz=sz;vec4 Ctp=St*Sp-Ct*Cp;vec4 qx=mix(Ctp*St,Sp,sz);vec4 qy=mix(-Ctp*Ct,Cp,sz);vec4 qz=-(py*Cp+px*Sp);vec4 Sa=vec4(sin(alpha));vec4 Ca=vec4(cos(alpha));gx=Ca*px+Sa*qx;gy=Ca*py+Sa*qy;gz=Ca*pz+Sa*qz;}else{gx=Ct*sz_prime;gy=St*sz_prime;gz=sz;}
 #endif
-vec3 g0=vec3(gx.x,gy.x,gz.x);vec3 g1=vec3(gx.y,gy.y,gz.y);vec3 g2=vec3(gx.z,gy.z,gz.z);vec3 g3=vec3(gx.w,gy.w,gz.w);vec4 w=0.5-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3));w=max(w,0.0);vec4 w2=w*w;vec4 w3=w2*w;vec4 gdotx=vec4(dot(g0,x0),dot(g1,x1),dot(g2,x2),dot(g3,x3));float n=dot(w3,gdotx);vec4 dw=-6.0*w2*gdotx;vec3 dn0=w3.x*g0+dw.x*x0;vec3 dn1=w3.y*g1+dw.y*x1;vec3 dn2=w3.z*g2+dw.z*x2;vec3 dn3=w3.w*g3+dw.w*x3;gradient=39.5*(dn0+dn1+dn2+dn3);return 39.5*n;}`;const{randFloat:nt,randFloatSpread:st}=xe,Bt={gpgpuSize:256,background:16777215,colors:[65280,255],color:16711680,coordScale:1.5,noiseIntensity:.001,noiseTimeCoef:1e-4,pointSize:5,pointDecay:.005,sleepRadiusX:250,sleepRadiusY:250,sleepTimeCoefX:.001,sleepTimeCoefY:.002};function Ht(h) {
+vec3 g0=vec3(gx.x,gy.x,gz.x);vec3 g1=vec3(gx.y,gy.y,gz.y);vec3 g2=vec3(gx.z,gy.z,gz.z);vec3 g3=vec3(gx.w,gy.w,gz.w);vec4 w=0.5-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3));w=max(w,0.0);vec4 w2=w*w;vec4 w3=w2*w;vec4 gdotx=vec4(dot(g0,x0),dot(g1,x1),dot(g2,x2),dot(g3,x3));float n=dot(w3,gdotx);vec4 dw=-6.0*w2*gdotx;vec3 dn0=w3.x*g0+dw.x*x0;vec3 dn1=w3.y*g1+dw.y*x1;vec3 dn2=w3.z*g2+dw.z*x2;vec3 dn3=w3.w*g3+dw.w*x3;gradient=39.5*(dn0+dn1+dn2+dn3);return 39.5*n;}`;const{randFloat:nt,randFloatSpread:st}=xe,Bt={gpgpuSize:256,background:16777215,colors:[65280,255],color:16711680,coordScale:1.5,noiseIntensity:.001,noiseTimeCoef:1e-4,pointSize:5,pointDecay:.005,sleepRadiusX:250,sleepRadiusY:250,sleepTimeCoefX:.001,sleepTimeCoefY:.002};
+function Ht(h) {
     const e = { ...Bt, ...h };
     const o = e.gpgpuSize;
     const t = o * o;
@@ -205,7 +206,9 @@ const yourScene = new THREE.Scene();
 const backgroundColor = 0x00FF00; // Замените на нужное значение цвета
 
 // Инициализируем конфигурацию с функцией Ht
-const config = Ht(yourScene, { background: backgroundColor });function F(A){i=new ge(o,o,A),A.capabilities.isWebGL2||i.setDataType(he),r=i.createTexture(),d=i.createTexture(),V(r,d),n=i.addVariable("textureVelocity",`
+const config = Ht(yourScene, { background: backgroundColor });
+
+function F(A){i=new ge(o,o,A),A.capabilities.isWebGL2||i.setDataType(he),r=i.createTexture(),d=i.createTexture(),V(r,d),n=i.addVariable("textureVelocity",`
       ${$}
       uniform float uTime;
       uniform float uCoordScale;
